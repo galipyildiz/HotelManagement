@@ -10,14 +10,18 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlined from "@mui/icons-material/LockOutlined";
-import { Copyright } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 function SignInSide() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log(e);
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
 
   const handleSignUpClick = (e) => {
@@ -105,7 +109,6 @@ function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
-            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
       </Grid>

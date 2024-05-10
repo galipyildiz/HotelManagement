@@ -1,4 +1,4 @@
-import { Copyright, LockOutlined } from "@mui/icons-material";
+import { LockOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -16,6 +16,12 @@ function SignUpSide() {
 
   const handleSubmit = (e) => {
     console.log(e);
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
 
   const handleSignInClick = (e) => {
@@ -84,7 +90,6 @@ function SignUpSide() {
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 }
