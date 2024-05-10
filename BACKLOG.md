@@ -10,7 +10,7 @@
 - [ ] Tablolar oluştururken basit veritabanı kuralları olmasına dikkat edilmeli. Örn. Index olması, ForeignKey olması ve doğru şekilde bağlanmış olması vb.
 
 ## Kodlama 
-- [ ] Back-end çok katmanlı bir mimaride olacak. Data, Service ve WebApi katmanları olacaktır.
+- [X] Back-end çok katmanlı bir mimaride olacak. Data, Service ve WebApi katmanları olacaktır.
 - [ ] Arayüz seçimi size ait olmakla birlikte Reactjs, MVC veya Razor Page yöntemlerinden birini tercih edebilirsiniz. 
 - [ ] Entity Framework yapısı kullanılacak
 - [ ] Arayüzde bina/oda/depo ekleme, silme, güncelleme listeme gibi ekranlar olacak.
