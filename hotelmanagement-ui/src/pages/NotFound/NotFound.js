@@ -3,8 +3,16 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Error404Png from "../../assets/error-404.png";
+import { useNavigate } from "react-router-dom";
 
 function NotFound() {
+  const navigate = useNavigate();
+
+  const handleBackToHomeClick = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
+
   return (
     <Box
       component="main"
@@ -40,12 +48,7 @@ function NotFound() {
           You either tried some shady route or you came here by mistake.
           Whichever it is, try using the navigation
         </Typography>
-        <Button
-          //   component={RouterLink}
-          //   href={paths.home}
-          //   startIcon={<ArrowLeftIcon fontSize="var(--icon-fontSize-md)" />}
-          variant="contained"
-        >
+        <Button onClick={(e) => handleBackToHomeClick(e)} variant="contained">
           Go back to home
         </Button>
       </Stack>
