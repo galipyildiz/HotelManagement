@@ -11,10 +11,18 @@ import {
 } from "@mui/material";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import { Copyright } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function SignInSide() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     console.log(e);
+  };
+
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
+    navigate("/register");
   };
 
   return (
@@ -88,7 +96,11 @@ function SignInSide() {
             <Grid container>
               <Grid item xs></Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link
+                  onClick={(e) => handleSignUpClick(e)}
+                  href="#"
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

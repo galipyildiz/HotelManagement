@@ -9,10 +9,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function SignUpSide() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     console.log(e);
+  };
+
+  const handleSignInClick = (e) => {
+    e.preventDefault();
+    navigate("/login");
   };
 
   return (
@@ -65,7 +73,11 @@ function SignUpSide() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link
+                onClick={(e) => handleSignInClick(e)}
+                href="#"
+                variant="body2"
+              >
                 Already have an account? Sign in
               </Link>
             </Grid>
