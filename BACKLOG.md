@@ -12,7 +12,7 @@
 ## Kodlama 
 - [X] Back-end çok katmanlı bir mimaride olacak. Data, Service ve WebApi katmanları olacaktır.
 - [X] Arayüz seçimi size ait olmakla birlikte Reactjs, MVC veya Razor Page yöntemlerinden birini tercih edebilirsiniz. 
-- [ ] Entity Framework yapısı kullanılacak
+- [X] Entity Framework yapısı kullanılacak
 - [ ] Arayüzde bina/oda/depo ekleme, silme, güncelleme listeme gibi ekranlar olacak.
 - [ ] (Opsiyonel +) Birbiri ile bağlantılı tablolar tek ekranda olabilir. Yani Bina tanım ekranına girildiğinde hem binaları hem de bu binaya ait oda ve depoları listeleyebileceğiniz, ekleyebileceğiniz, silebileceğiniz bir ekran olabilir.
 - [ ] Arayüzde bulunan haberleşme için ASP.NET WebAPI kullanılacak. Tüm işlemler(CRUD) için arayüzden Web API niz çağırılacak ve işlemler Web API üzerinden gerçekleştirilecektir. Örn. Bina ekleme yapmak istendiğinde formdan aldığınız bina bilgileri api/buildings/addbuilding şeklinde Web API nize gidecek. Bu Web API oluşturduğunuz Bina modelini alacak ve veritabanına ekleme yapacaktır.

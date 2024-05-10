@@ -18,4 +18,10 @@
 /Service
 Add-Migration InitialCreate -Context AppDbContext -OutputDir Data\Migrations
 Update-Database -Context AppDbContext
+
+Add-Migration Initial -Context IdentityDbContext -OutputDir Identity\Migrations
+Update-Database -Context IdentityDbContext
 ```
+
+#### Resources
+- https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0
