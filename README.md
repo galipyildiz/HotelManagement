@@ -1,6 +1,7 @@
 ### HotelManagement
 
 #### Project Structure
+
 ```
 ./
 - Data
@@ -14,6 +15,7 @@
 ![erp_digram](https://gcdnb.pbrd.co/images/hPdGnkpysl78.png?o=1)
 
 #### Migrations
+
 ```
 /Service
 Add-Migration InitialCreate -Context AppDbContext -OutputDir Data\Migrations
@@ -24,4 +26,9 @@ Update-Database -Context IdentityDbContext
 ```
 
 #### Resources
+
 - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0
+- https://reactrouter.com/en/main/start/tutorial
+- https://mui.com/material-ui/getting-started/templates/
+- https://github.com/devias-io/material-kit-react/tree/main
+- https://github.com/mui/material-ui/tree/v5.15.17/docs/data/material/getting-started/templates
