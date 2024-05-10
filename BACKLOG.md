@@ -6,8 +6,8 @@
 - [X] (Opsiyonel +) İş Emri tanımı olacak. Bu tanımı bina/oda/depo için veya envanter/ürün için bakım talepleri gibi düşünebilirsiniz. İş Emri tanımları xxx binadaki xxx odada bulunan xxx kodlu ürünün bakımı/temizliği/kontrolü şeklinde bir yapıda olacak.  
 
 ## Veritabanı
-- [ ] MySQL, MsSQL veya PostgreSQL olabilir. Tercih size ait.
-- [ ] Tablolar oluştururken basit veritabanı kuralları olmasına dikkat edilmeli. Örn. Index olması, ForeignKey olması ve doğru şekilde bağlanmış olması vb.
+- [X] MySQL, MsSQL veya PostgreSQL olabilir. Tercih size ait. PostgreSQL
+- [X] Tablolar oluştururken basit veritabanı kuralları olmasına dikkat edilmeli. Örn. Index olması, ForeignKey olması ve doğru şekilde bağlanmış olması vb.
 
 ## Kodlama 
 - [X] Back-end çok katmanlı bir mimaride olacak. Data, Service ve WebApi katmanları olacaktır.
