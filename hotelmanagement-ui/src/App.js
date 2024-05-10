@@ -1,22 +1,19 @@
-import './App.css';
+import { ScopedCssBaseline } from "@mui/material"; //normalize.css It fixes some inconsistencies across browsers
+import "./App.css";
+import Button from "@mui/material/Button";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <ScopedCssBaseline>
+      <header>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button onClick={(e) => console.log(e)} variant="contained">
+          Hello world
+        </Button>
       </header>
-    </div>
+    </ScopedCssBaseline>
   );
 }
 
