@@ -13,7 +13,7 @@ namespace HotelManagement.WebAPI
             // Add services to the container.
             #region postgres
 
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<HotelManagementDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             #endregion
 
