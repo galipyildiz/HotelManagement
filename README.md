@@ -25,6 +25,36 @@ Add-Migration Initial -Context IdentityDbContext -OutputDir Identity\Migrations
 Update-Database -Context IdentityDbContext
 ```
 
+#### Using axios with token example
+
+```js
+import { handleApiError } from "../../utils/helpers";
+import { api, useInterceptor } from "../../utils/api";
+import { useEffect } from "react";
+
+function Home() {
+  useInterceptor();
+  useEffect(() => {
+    testReqAuth();
+  }, []);
+
+  const testReqAuth = async () => {
+    try {
+      const response = await api.get("/test");
+      console.log(response);
+    } catch (error) {
+      let message = handleApiError(error);
+      console.log(message);
+    }
+  };
+
+  return <div>Home</div>;
+}
+
+export default Home;
+
+```
+
 #### Resources
 
 - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0
@@ -32,3 +62,4 @@ Update-Database -Context IdentityDbContext
 - https://mui.com/material-ui/getting-started/templates/
 - https://github.com/devias-io/material-kit-react/tree/main
 - https://github.com/mui/material-ui/tree/v5.15.17/docs/data/material/getting-started/templates
+- https://github.com/remix-run/react-router/issues/10637
