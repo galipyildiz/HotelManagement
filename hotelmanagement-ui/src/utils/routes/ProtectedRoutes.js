@@ -1,11 +1,12 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAppContext } from "../AppContext";
+import MiniDrawer from "../layout/MiniDrawer";
 
 const ProtectedRoutes = () => {
   const { token } = useAppContext();
 
-  return token ? <Outlet /> : <Navigate to="/login" replace />;
+  return token ? <MiniDrawer /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoutes;
