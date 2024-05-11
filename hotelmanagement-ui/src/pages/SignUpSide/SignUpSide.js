@@ -49,10 +49,10 @@ function SignUpSide() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container container component="main" sx={{ height: "100vh" }}>
       <Box
         sx={{
-          marginTop: 8,
+          paddingTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
