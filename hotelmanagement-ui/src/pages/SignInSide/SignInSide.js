@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -11,17 +11,47 @@ import {
 } from "@mui/material";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/api";
 
 function SignInSide() {
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const password = data.get("password");
+    await login(email, password);
+  };
+
+  const login = async (email, password) => {
+    try {
+      setError("");
+      const response = await api.post("/login", {
+        email: email,
+        password: password,
+      });
+      const token = response.data.accessToken;
+      localStorage.setItem("token", token);
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        let status = error.response.status;
+        let errorMessage = "";
+        if (error.response.data) {
+          errorMessage =
+            error.response.data.title + " " + error.response.data.detail;
+        }
+        setError(status + " " + errorMessage);
+      } else if (error.request) {
+        // İstek yapıldı ama hiçbir yanıt alınamadı
+        setError("No response was received");
+      } else {
+        // İstek yapılırken bir hata oluştu
+        setError("Error: " + error.message);
+      }
+    }
   };
 
   const handleSignUpClick = (e) => {
@@ -65,8 +95,7 @@ function SignInSide() {
           </Typography>
           <Box
             component="form"
-            noValidate
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e)}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -78,6 +107,8 @@ function SignInSide() {
               name="email"
               autoComplete="email"
               autoFocus
+              error={error.length > 0}
+              helperText={error}
             />
             <TextField
               margin="normal"
@@ -88,6 +119,8 @@ function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={error.length > 0}
+              helperText={error}
             />
             <Button
               type="submit"
