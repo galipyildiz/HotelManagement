@@ -10,18 +10,37 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../utils/api";
+import { useState } from "react";
+import { handleApiError } from "../../utils/helpers";
 
 function SignUpSide() {
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(e);
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const password = data.get("password");
+    await register(email, password);
+  };
+
+  const register = async (email, password) => {
+    try {
+      setError("");
+      const response = await api.post("/register", {
+        email: email,
+        password: password,
+      });
+      if (response.status === 200) {
+        navigate("/login");
+      }
+    } catch (error) {
+      let errorMessage = handleApiError(error);
+      setError(errorMessage);
+    }
   };
 
   const handleSignInClick = (e) => {
@@ -55,6 +74,8 @@ function SignUpSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                error={error.length > 0}
+                helperText={error}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,6 +87,8 @@ function SignUpSide() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                error={error.length > 0}
+                helperText={error}
               />
             </Grid>
           </Grid>
