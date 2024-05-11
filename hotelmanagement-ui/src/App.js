@@ -1,15 +1,16 @@
-import { ScopedCssBaseline } from "@mui/material"; //normalize.css It fixes some inconsistencies across browsers
+import { useState } from "react";
 import "./App.css";
-import SignInSide from "./pages/SignInSide";
-import Home from "./pages/Home";
+import AppContext from "./utils/AppContext";
+import router from "./utils/routes/router";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
-  const isLoggedIn = false;
+  const [token, setToken] = useState(sessionStorage["token"] || null);
 
   return (
-    <>
-      {isLoggedIn ? <Home /> : <SignInSide />}
-    </>
+    <AppContext.Provider value={{ token, setToken }}>
+      <RouterProvider router={router} />
+    </AppContext.Provider>
   );
 }
 
