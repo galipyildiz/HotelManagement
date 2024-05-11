@@ -52,7 +52,7 @@ namespace HotelManagement.WebAPI
                                     Id="Bearer"
                             }
                     },
-            new string[]{}
+                        Array.Empty<string>()
                     }
                 });
             });
