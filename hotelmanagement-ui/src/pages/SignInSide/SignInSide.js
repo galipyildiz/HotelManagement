@@ -23,7 +23,11 @@ function SignInSide() {
     const data = new FormData(e.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    await login(email, password);
+    const token = await login(email, password);
+    if (token) {
+      localStorage.setItem("token", token);
+      navigate("/");  
+    }
   };
 
   const login = async (email, password) => {
@@ -34,8 +38,7 @@ function SignInSide() {
         password: password,
       });
       const token = response.data.accessToken;
-      localStorage.setItem("token", token);
-      navigate("/");
+      return token;
     } catch (error) {
       let errorMessage = handleApiError(error);
       setError(errorMessage);
