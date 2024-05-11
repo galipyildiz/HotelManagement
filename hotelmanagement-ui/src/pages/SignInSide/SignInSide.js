@@ -12,6 +12,7 @@ import {
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/api";
+import { handleApiError } from "../../utils/helpers";
 
 function SignInSide() {
   const [error, setError] = useState("");
@@ -36,21 +37,8 @@ function SignInSide() {
       localStorage.setItem("token", token);
       navigate("/");
     } catch (error) {
-      if (error.response) {
-        let status = error.response.status;
-        let errorMessage = "";
-        if (error.response.data) {
-          errorMessage =
-            error.response.data.title + " " + error.response.data.detail;
-        }
-        setError(status + " " + errorMessage);
-      } else if (error.request) {
-        // İstek yapıldı ama hiçbir yanıt alınamadı
-        setError("No response was received");
-      } else {
-        // İstek yapılırken bir hata oluştu
-        setError("Error: " + error.message);
-      }
+      let errorMessage = handleApiError(error);
+      setError(errorMessage);
     }
   };
 
