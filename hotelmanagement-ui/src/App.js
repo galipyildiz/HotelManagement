@@ -4,13 +4,12 @@ import SignInSide from "./pages/SignInSide";
 import Home from "./pages/Home";
 
 function App() {
-  
   const isLoggedIn = false;
 
   return (
-    <ScopedCssBaseline>
+    <>
       {isLoggedIn ? <Home /> : <SignInSide />}
-    </ScopedCssBaseline>
+    </>
   );
 }
 

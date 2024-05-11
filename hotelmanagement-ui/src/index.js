@@ -7,10 +7,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { ScopedCssBaseline } from "@mui/material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ScopedCssBaseline>
+      <RouterProvider router={router} />
+    </ScopedCssBaseline>
   </React.StrictMode>
 );
