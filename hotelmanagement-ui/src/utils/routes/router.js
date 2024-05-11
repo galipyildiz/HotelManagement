@@ -4,6 +4,9 @@ import SignUpSide from "../../pages/SignUpSide";
 import NotFound from "../../pages/NotFound";
 import Home from "../../pages/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
+import Buildings from "../../pages/Buildings";
+import WorkOrders from "../../pages/WorkOrders";
+import InventoryMovements from "../../pages/InventoryMovements";
 
 export default createBrowserRouter([
   {
@@ -20,6 +23,18 @@ export default createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/buildings",
+        element: <Buildings />,
+      },
+      {
+        path: "/work-orders",
+        element: <WorkOrders />,
+      },
+      {
+        path: "/inventory-movements",
+        element: <InventoryMovements />,
       },
     ],
   },
