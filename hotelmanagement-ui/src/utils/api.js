@@ -1,7 +1,6 @@
 import axios from "axios";
-
+import { useAppContext } from "./AppContext";
 const API_URL = process.env.REACT_APP_API_URL;
-const token = localStorage.getItem("token");
 
 const api = axios.create({
   baseURL: API_URL,
@@ -10,7 +9,9 @@ const api = axios.create({
   },
 });
 
-if (token) {
+const useInterceptor = () => {
+  const { token } = useAppContext();
+
   api.interceptors.request.use(
     (config) => {
       config.headers.Authorization = `Bearer ${token}`;
@@ -20,6 +21,6 @@ if (token) {
       return Promise.reject(error);
     }
   );
-}
+};
 
-export default api;
+export { api, useInterceptor };

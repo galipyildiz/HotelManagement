@@ -11,11 +11,13 @@ import {
 } from "@mui/material";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
-import api from "../../utils/api";
+import { api } from "../../utils/api";
 import { handleApiError } from "../../utils/helpers";
+import { useAppContext } from "../../utils/AppContext";
 
 function SignInSide() {
   const [error, setError] = useState("");
+  const { updateToken } = useAppContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -25,8 +27,8 @@ function SignInSide() {
     const password = data.get("password");
     const token = await login(email, password);
     if (token) {
-      localStorage.setItem("token", token);
-      navigate("/");  
+      updateToken(token);
+      navigate("/");
     }
   };
 
