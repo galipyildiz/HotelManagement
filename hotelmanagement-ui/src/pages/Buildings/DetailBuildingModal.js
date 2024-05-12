@@ -205,6 +205,7 @@ function DetailBuildingModal({ open, setOpen, buildingId }) {
                       }}
                     >
                       <IconButton
+                      //TODO
                       //   onClick={(e) =>
                       //     handleEditBuildingClick(e, building.id)
                       //   }
@@ -266,6 +267,7 @@ function DetailBuildingModal({ open, setOpen, buildingId }) {
                       }}
                     >
                       <IconButton
+                      //TODO
                       //   onClick={(e) =>
                       //     handleEditBuildingClick(e, building.id)
                       //   }
