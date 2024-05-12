@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -39,12 +40,9 @@ function EditBuildingModal({ open, setOpen, buildingId }) {
 
   const updateBuildingReq = async (newName) => {
     try {
-      const response = await api.put(
-        updateBuildingEndPoint + `?id=${buildingId}`,
-        {
-          name: newName,
-        }
-      );
+      await api.put(updateBuildingEndPoint + `?id=${buildingId}`, {
+        name: newName,
+      });
     } catch (error) {
       console.log(error);
     }
