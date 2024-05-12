@@ -3,6 +3,7 @@
     public class Room : Base
     {
         public required string Name { get; set; }
-        public required Building Building { get; set; }
+        public int BuildingId { get; set; }
+        public Building Building { get; set; }
     }
 }

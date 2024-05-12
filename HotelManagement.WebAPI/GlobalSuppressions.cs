@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0270:Use coalesce expression", Justification = "<Pending>", Scope = "member", Target = "~M:HotelManagement.WebAPI.Services.Abstract.BuildingService.DeleteBuildingAsync(System.Int32)~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage("Style", "IDE0270:Use coalesce expression", Justification = "<Pending>", Scope = "member", Target = "~M:HotelManagement.WebAPI.Services.Abstract.StorageService.DeleteStorageAsync(System.Int32)~System.Threading.Tasks.Task")]
