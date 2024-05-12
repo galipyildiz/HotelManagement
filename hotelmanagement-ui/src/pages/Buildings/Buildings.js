@@ -16,15 +16,17 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Add, AddBusiness, AddHome, Delete, Edit } from "@mui/icons-material";
+import { Add, Delete, Edit, Settings } from "@mui/icons-material";
 import AddBuildingModal from "./AddBuildingModal";
 import EditBuildingModal from "./EditBuildingModal";
+import DetailBuildingModal from "./DetailBuildingModal";
 
 function Buildings() {
   useInterceptor();
   const [buildings, setBuildings] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [detailModalOpen, setDetailModalOpen] = useState(false);
   const [selectedBuildingId, setSelectedBuildingId] = useState(0);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function Buildings() {
     }
   };
 
-  const handleEditBuildingClick = async (e, buildingId) => {
+  const handleEditBuildingClick = (e, buildingId) => {
     e.preventDefault();
     setSelectedBuildingId(buildingId);
     setEditModalOpen(true);
@@ -75,6 +77,12 @@ function Buildings() {
       console.log(error);
       return false;
     }
+  };
+
+  const handleDetailClick = (e, buildingId) => {
+    e.preventDefault();
+    setSelectedBuildingId(buildingId);
+    setDetailModalOpen(true);
   };
 
   return (
@@ -126,11 +134,10 @@ function Buildings() {
                       justifyContent: "center",
                     }}
                   >
-                    <IconButton>
-                      <AddBusiness color="primary" />
-                    </IconButton>
-                    <IconButton>
-                      <AddHome color="primary" />
+                    <IconButton
+                      onClick={(e) => handleDetailClick(e, building.id)}
+                    >
+                      <Settings color="primary" />
                     </IconButton>
                     <IconButton
                       onClick={(e) => handleEditBuildingClick(e, building.id)}
@@ -156,6 +163,13 @@ function Buildings() {
         <EditBuildingModal
           open={editModalOpen}
           setOpen={setEditModalOpen}
+          buildingId={selectedBuildingId}
+        />
+      )}
+      {detailModalOpen && (
+        <DetailBuildingModal
+          open={detailModalOpen}
+          setOpen={setDetailModalOpen}
           buildingId={selectedBuildingId}
         />
       )}
