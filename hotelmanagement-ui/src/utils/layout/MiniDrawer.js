@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Apartment, Home, MoveDown, WorkHistory } from "@mui/icons-material";
+import { Apartment, Category, Home, WorkHistory } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -188,6 +188,30 @@ export default function MiniDrawer() {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
+              onClick={(e) => navigate("/inventory-movements")}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <Category />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Inventory Movements"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
               onClick={(e) => navigate("/work-orders")}
             >
               <ListItemIcon
@@ -201,30 +225,6 @@ export default function MiniDrawer() {
               </ListItemIcon>
               <ListItemText
                 primary={"Work Orders"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-              onClick={(e) => navigate("/inventory-movements")}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <MoveDown />
-              </ListItemIcon>
-              <ListItemText
-                primary={"Inventory Movements"}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
