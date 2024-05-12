@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAppContext } from "./AppContext";
+import { useNavigate } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const api = axios.create({
@@ -10,7 +11,8 @@ const api = axios.create({
 });
 
 const useInterceptor = () => {
-  const { token } = useAppContext();
+  const { token, updateToken } = useAppContext();
+  const navigate = useNavigate();
 
   api.interceptors.request.use(
     (config) => {
@@ -18,6 +20,19 @@ const useInterceptor = () => {
       return config;
     },
     (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  api.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response && error.response.status === 401) {
+        updateToken("");
+        navigate("/login");
+      }
       return Promise.reject(error);
     }
   );
