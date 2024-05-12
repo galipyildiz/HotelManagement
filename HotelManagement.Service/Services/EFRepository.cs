@@ -28,7 +28,7 @@ namespace HotelManagement.Service.Services
 
         public async Task<List<T>> GetAllAsync()
         {
-            var result = await _dbContext.Set<T>().ToListAsync();
+            var result = await _dbContext.Set<T>().OrderBy(x => x.Id).ToListAsync();
             return result;
         }
 
