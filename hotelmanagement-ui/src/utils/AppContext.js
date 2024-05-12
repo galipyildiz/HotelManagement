@@ -12,8 +12,12 @@ export const AppProvider = ({ children }) => {
     sessionStorage.setItem("token", newToken);
   };
 
+  const removeToken = () => {
+    sessionStorage.clear();
+  };
+
   return (
-    <AppContext.Provider value={{ token, updateToken }}>
+    <AppContext.Provider value={{ token, updateToken, removeToken }}>
       {children}
     </AppContext.Provider>
   );

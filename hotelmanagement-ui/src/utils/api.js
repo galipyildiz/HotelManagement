@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 const useInterceptor = () => {
-  const { token, updateToken } = useAppContext();
+  const { token, removeToken } = useAppContext();
   const navigate = useNavigate();
 
   api.interceptors.request.use(
@@ -30,7 +30,7 @@ const useInterceptor = () => {
     },
     (error) => {
       if (error.response && error.response.status === 401) {
-        updateToken("");
+        removeToken();
         navigate("/login");
       }
       return Promise.reject(error);
