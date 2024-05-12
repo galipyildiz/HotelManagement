@@ -56,7 +56,7 @@ namespace HotelManagement.WebAPI.Services.Abstract
         {
             var rooms = await _repository.GetAllAsync();
 
-            var filteredRooms = rooms.Where(room => room.Id == buildingId).ToList();
+            var filteredRooms = rooms.Where(room => room.BuildingId == buildingId).ToList();
 
             var result = new List<GetRoomResponse>();
 
