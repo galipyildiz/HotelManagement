@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
-import { getAllBuildingsEndPoint } from "./ApiEndPoints";
+import {
+  deleteBuildingEndPoint,
+  getAllBuildingsEndPoint,
+} from "./ApiEndPoints";
 import {
   Button,
   Paper,
@@ -13,17 +16,22 @@ import {
   Typography,
 } from "@mui/material";
 import { Add, Delete, Edit } from "@mui/icons-material";
+import AddBuildingModal from "./AddBuildingModal";
 
 function Buildings() {
   useInterceptor();
   const [buildings, setBuildings] = useState([]);
-
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  
   useEffect(() => {
-    getBuildingsReq();
-  }, []);
+    if (!addModalOpen) {
+      getBuildingsReq();
+    }
+  }, [addModalOpen]);
 
   const getBuildingsReq = async () => {
     try {
+      console.log('cek');
       const response = await api.get(getAllBuildingsEndPoint);
       setBuildings(response.data);
     } catch (error) {
@@ -33,12 +41,16 @@ function Buildings() {
 
   const handleAddBuildingClick = async (e) => {
     e.preventDefault();
-    console.log("add");
+    setAddModalOpen(true);
   };
 
   const handleDeleteBuildingClick = async (e, buildingId) => {
     e.preventDefault();
-    console.log(buildingId, "delete");
+    let isSuccess = await deleteBuildingReq(buildingId);
+    if (isSuccess) {
+      let temp = buildings.filter((building) => building.id !== buildingId);
+      setBuildings(temp);
+    }
   };
 
   const handleEditBuildingClick = async (e, buildingId) => {
@@ -46,8 +58,24 @@ function Buildings() {
     console.log(buildingId, "edit");
   };
 
+  const deleteBuildingReq = async (buildinId) => {
+    try {
+      const response = await api.delete(
+        deleteBuildingEndPoint + `?id=${buildinId}`
+      );
+      if (response.status === 204) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
   return (
     <div>
+      {/* TODO convert to component page header */}
       <Typography variant="h5" marginBottom={5}>
         Buildings
       </Typography>
@@ -68,6 +96,7 @@ function Buildings() {
           <span>Add Building</span>
         </Button>
       </div>
+      {/* TODO Convert to component table */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
@@ -110,6 +139,7 @@ function Buildings() {
           </TableBody>
         </Table>
       </TableContainer>
+      <AddBuildingModal open={addModalOpen} setOpen={setAddModalOpen} />
     </div>
   );
 }
