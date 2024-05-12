@@ -20,21 +20,21 @@ namespace HotelManagement.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBuildings()
         {
-            var result = await _buildingService.GetAllBuildingsAsync();
-            return Ok(result);
+            var response = await _buildingService.GetAllBuildingsAsync();
+            return Ok(response);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetBuildingById(int id)
         {
-            var result = await _buildingService.GetBuildingByIdAsync(id);
-            return Ok(result);
+            var response = await _buildingService.GetBuildingByIdAsync(id);
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBuilding(AddBuildingRequest dto)
+        public async Task<IActionResult> AddBuilding(AddBuildingRequest request)
         {
-            var response = await _buildingService.AddBuildingAsync(dto);
+            var response = await _buildingService.AddBuildingAsync(request);
             return Ok(response);
         }
 
