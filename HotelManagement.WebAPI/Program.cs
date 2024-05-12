@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using HotelManagement.Service.Services.Interfaces;
 using HotelManagement.Service.Services;
+using HotelManagement.WebAPI.Services.Concrete;
+using HotelManagement.WebAPI.Services.Abstract;
 
 namespace HotelManagement.WebAPI
 {
@@ -74,6 +76,7 @@ namespace HotelManagement.WebAPI
             #endregion
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+            builder.Services.AddScoped<IBuildingService, BuildingService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
