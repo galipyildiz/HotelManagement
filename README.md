@@ -18,8 +18,8 @@
 
 ```
 /Service
-Add-Migration InitialCreate -Context AppDbContext -OutputDir Data\Migrations
-Update-Database -Context AppDbContext
+Add-Migration InitialCreate -Context HotelManagementDbContext -OutputDir Data\Migrations
+Update-Database -Context HotelManagementDbContext
 
 Add-Migration Initial -Context IdentityDbContext -OutputDir Identity\Migrations
 Update-Database -Context IdentityDbContext
