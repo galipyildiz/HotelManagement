@@ -18,6 +18,13 @@ namespace HotelManagement.WebAPI.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetAllStorages()
+        {
+            var response = await _storageService.GetAllStoragesAsync();
+            return Ok(response);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetStorageById(int id)
         {
             var response = await _storageService.GetStorageByIdAsync(id);

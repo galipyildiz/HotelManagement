@@ -39,6 +39,24 @@ namespace HotelManagement.WebAPI.Services.Abstract
             await _repository.DeleteAsync(storage);
         }
 
+        public async Task<List<GetStorageResponse>> GetAllStoragesAsync()
+        {
+            var storages = await _repository.GetAllAsync();
+
+            var result = new List<GetStorageResponse>();
+
+            foreach (var storage in storages)
+            {
+                result.Add(new GetStorageResponse
+                {
+                    Id = storage.Id,
+                    Name = storage.Name
+                });
+            }
+
+            return result;
+        }
+
         public async Task<GetStorageResponse> GetStorageByIdAsync(int id)
         {
             var storage = await _repository.GetByIdAsync(id);
