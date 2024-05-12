@@ -6,6 +6,7 @@ import {
 } from "./ApiEndPoints";
 import {
   Button,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -15,23 +16,25 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Add, Delete, Edit } from "@mui/icons-material";
+import { Add, AddBusiness, AddHome, Delete, Edit } from "@mui/icons-material";
 import AddBuildingModal from "./AddBuildingModal";
+import EditBuildingModal from "./EditBuildingModal";
 
 function Buildings() {
   useInterceptor();
   const [buildings, setBuildings] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedBuildingId, setSelectedBuildingId] = useState(0);
+
   useEffect(() => {
-    if (!addModalOpen) {
+    if (!addModalOpen || !editModalOpen) {
       getBuildingsReq();
     }
-  }, [addModalOpen]);
+  }, [addModalOpen, editModalOpen]);
 
   const getBuildingsReq = async () => {
     try {
-      console.log('cek');
       const response = await api.get(getAllBuildingsEndPoint);
       setBuildings(response.data);
     } catch (error) {
@@ -55,7 +58,8 @@ function Buildings() {
 
   const handleEditBuildingClick = async (e, buildingId) => {
     e.preventDefault();
-    console.log(buildingId, "edit");
+    setSelectedBuildingId(buildingId);
+    setEditModalOpen(true);
   };
 
   const deleteBuildingReq = async (buildinId) => {
@@ -122,16 +126,22 @@ function Buildings() {
                       justifyContent: "center",
                     }}
                   >
-                    <Button
+                    <IconButton>
+                      <AddBusiness color="primary" />
+                    </IconButton>
+                    <IconButton>
+                      <AddHome color="primary" />
+                    </IconButton>
+                    <IconButton
                       onClick={(e) => handleEditBuildingClick(e, building.id)}
                     >
                       <Edit color="secondary" />
-                    </Button>
-                    <Button
+                    </IconButton>
+                    <IconButton
                       onClick={(e) => handleDeleteBuildingClick(e, building.id)}
                     >
                       <Delete color="error" />
-                    </Button>
+                    </IconButton>
                   </div>
                 </TableCell>
               </TableRow>
@@ -139,7 +149,16 @@ function Buildings() {
           </TableBody>
         </Table>
       </TableContainer>
-      <AddBuildingModal open={addModalOpen} setOpen={setAddModalOpen} />
+      {addModalOpen && (
+        <AddBuildingModal open={addModalOpen} setOpen={setAddModalOpen} />
+      )}
+      {editModalOpen && (
+        <EditBuildingModal
+          open={editModalOpen}
+          setOpen={setEditModalOpen}
+          buildingId={selectedBuildingId}
+        />
+      )}
     </div>
   );
 }
