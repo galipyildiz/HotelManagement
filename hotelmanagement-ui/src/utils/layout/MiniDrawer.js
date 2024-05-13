@@ -1,7 +1,13 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Apartment, Category, Home, WorkHistory } from "@mui/icons-material";
+import {
+  Apartment,
+  Category,
+  Home,
+  Inventory,
+  WorkHistory,
+} from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -88,7 +94,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -201,6 +207,30 @@ export default function MiniDrawer() {
               </ListItemIcon>
               <ListItemText
                 primary={"Inventory Movements"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+              onClick={(e) => navigate("/inventory-items")}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <Inventory />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Inventory Items"}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>

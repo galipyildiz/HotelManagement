@@ -7,6 +7,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Buildings from "../../pages/Buildings";
 import WorkOrders from "../../pages/WorkOrders";
 import InventoryMovements from "../../pages/InventoryMovements";
+import InventoryItems from "../../pages/InventoryItems";
 
 export default createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export default createBrowserRouter([
       {
         path: "/inventory-movements",
         element: <InventoryMovements />,
+      },
+      {
+        path: "/inventory-items",
+        element: <InventoryItems />,
       },
     ],
   },
