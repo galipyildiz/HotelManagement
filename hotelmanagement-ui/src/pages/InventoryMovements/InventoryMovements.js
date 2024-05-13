@@ -3,7 +3,6 @@ import {
   Checkbox,
   Divider,
   FormControl,
-  IconButton,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -26,7 +25,6 @@ import {
   getAllInventoryMovementsEndpoint,
   getAllStoragesEndpoint,
 } from "./ApiEndPoints";
-import { Delete, ImportExport } from "@mui/icons-material";
 
 function InventoryMovements() {
   useInterceptor();
@@ -222,7 +220,6 @@ function InventoryMovements() {
               <TableCell>Movement Type</TableCell>
               <TableCell>Movement Date</TableCell>
               <TableCell>Quantity</TableCell>
-              <TableCell style={{ width: "100px" }} align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -243,26 +240,6 @@ function InventoryMovements() {
                 <TableCell>{inventoryMovement.movementType}</TableCell>
                 <TableCell>{inventoryMovement.movementDate}</TableCell>
                 <TableCell>{inventoryMovement.quantity}</TableCell>
-                <TableCell align="right">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <IconButton
-                    // onClick={(e) => handleEditBuildingClick(e, building.id)}
-                    >
-                      <ImportExport color="primary" />
-                    </IconButton>
-                    <IconButton
-                    // onClick={(e) => handleDeleteBuildingClick(e, building.id)}
-                    >
-                      <Delete color="error" />
-                    </IconButton>
-                  </div>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
