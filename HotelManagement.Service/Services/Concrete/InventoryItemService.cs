@@ -2,6 +2,7 @@
 using HotelManagement.Service.Data;
 using HotelManagement.Service.Services;
 using HotelManagement.Service.Services.Models.InventoryItem;
+using HotelManagement.Service.Services.Models.InventoryItemMovement;
 using HotelManagement.Services.Models.InventoryItem;
 using HotelManagement.Services.Models.InventoryItemMovement;
 using HotelManagement.Services.Services.Abstract;
@@ -14,17 +15,20 @@ namespace HotelManagement.Services.Services.Concrete
         private readonly IRepository<InventoryItem> _inventoryItemRepository;
         private readonly IRepository<Storage> _storageRepository;
         private readonly IRepository<InventoryMovement> _inventoryMovementRepository;
+        private readonly IRepository<Room> _roomRepository;
         private readonly HotelManagementDbContext _hotelManagementDbContext;
 
         public InventoryItemService(
             IRepository<InventoryItem> inventoryItemRepository,
             IRepository<Storage> storageRepository,
             IRepository<InventoryMovement> inventoryMovementRepository,
+            IRepository<Room> roomRepository,
             HotelManagementDbContext hotelManagementDbContext)
         {
             _inventoryItemRepository = inventoryItemRepository;
             _storageRepository = storageRepository;
             _inventoryMovementRepository = inventoryMovementRepository;
+            _roomRepository = roomRepository;
             _hotelManagementDbContext = hotelManagementDbContext;
         }
         public async Task<AddInventoryItemResponse> AddInventoryItemAsync(AddInventoryItemRequest request)
@@ -119,8 +123,9 @@ namespace HotelManagement.Services.Services.Concrete
             var inventoryMovements = await _hotelManagementDbContext.InventoryMovements
                 .Include(im => im.InventoryItem)
                 .Include(im => im.ToStorage)
-                .Include(im => im.ToRoom)
                 .Include(im => im.FromStorage)
+                .Include(im => im.ToRoom)
+                    .ThenInclude(room => room.Building)
                 .ToListAsync();
 
             foreach (var inventoryMovement in inventoryMovements)
@@ -131,17 +136,47 @@ namespace HotelManagement.Services.Services.Concrete
                     FromStorageId = inventoryMovement.FromStorage?.Id ?? 0,
                     FromStorageName = inventoryMovement.FromStorage?.Name ?? "",
                     ToRoomId = inventoryMovement.ToRoom?.Id ?? 0,
+                    ToRoomName = inventoryMovement.ToRoom == null ? "" : $"{inventoryMovement.ToRoom.Building.Name}-{inventoryMovement.ToRoom.Name}",
                     ToStorageId = inventoryMovement.ToStorage?.Id ?? 0,
                     ToStorageName = inventoryMovement.ToStorage?.Name ?? "",
                     MovementType = inventoryMovement.MovementType,
                     MovementDate = inventoryMovement.MovementDate,
                     Quantity = inventoryMovement.Quantity,
                     InventoryItemId = inventoryMovement.InventoryItem.Id,
-                    InventoryItemName = inventoryMovement.InventoryItem.Name
+                    InventoryItemName = inventoryMovement.InventoryItem.Name,
                 });
             }
 
             return result;
+        }
+
+        public async Task OutInventoryItemAsync(OutInventoryItemRequest request)
+        {
+            var inventoryItem = await _inventoryItemRepository.GetByIdAsync(request.InventoryItemId);
+            var room = await _roomRepository.GetByIdAsync(request.ToRoomId);
+            var storage = await _storageRepository.GetByIdAsync(request.FromStorageId);
+
+            var inventoryItemLocation = _hotelManagementDbContext.InventoryItemLocations
+                .FirstOrDefault(x => x.InventoryItem == inventoryItem && x.Storage == storage);
+            if (inventoryItemLocation == null)
+                throw new NullReferenceException();
+
+            await _inventoryMovementRepository.AddAsync(new InventoryMovement()
+            {
+                InventoryItem = inventoryItem,
+                MovementDate = DateTime.UtcNow,
+                MovementType = Data.Enums.MovementType.Out,
+                Quantity = request.Quantity,
+                FromStorage = storage,
+                ToRoom = room,
+            });
+
+            var existQuantity = inventoryItemLocation.Quantity;
+            var newQuantity = existQuantity - request.Quantity;
+
+            inventoryItemLocation.Quantity = newQuantity;
+            _hotelManagementDbContext.Update(inventoryItemLocation);
+            await _hotelManagementDbContext.SaveChangesAsync();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace HotelManagement.Services.Services.Abstract
     {
         Task<AddInventoryItemResponse> AddInventoryItemAsync(AddInventoryItemRequest request);
         Task<List<GetInventoryMovementResponse>> GetAllInventoryMovementsAsync();
+        Task OutInventoryItemAsync(OutInventoryItemRequest request);
         Task<List<GetInventoryItemResponse>> GetAllInventoryItemsAsync();
     }
 }
