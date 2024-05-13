@@ -174,8 +174,16 @@ namespace HotelManagement.Services.Services.Concrete
             var existQuantity = inventoryItemLocation.Quantity;
             var newQuantity = existQuantity - request.Quantity;
 
-            inventoryItemLocation.Quantity = newQuantity;
-            _hotelManagementDbContext.Update(inventoryItemLocation);
+            if (newQuantity == 0)
+            {
+                _hotelManagementDbContext.InventoryItemLocations.Remove(inventoryItemLocation);
+            }
+            else
+            {
+                inventoryItemLocation.Quantity = newQuantity;
+                _hotelManagementDbContext.Update(inventoryItemLocation);
+            }
+
             await _hotelManagementDbContext.SaveChangesAsync();
         }
     }
