@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
 import { addBuildingEndPoint } from "./ApiEndPoints";
 import { useTranslation } from "react-i18next";

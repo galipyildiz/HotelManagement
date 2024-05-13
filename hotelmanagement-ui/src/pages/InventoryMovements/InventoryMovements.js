@@ -26,6 +26,7 @@ import {
   getAllStoragesEndpoint,
 } from "./ApiEndPoints";
 import { useTranslation } from "react-i18next";
+import AddButton from "../../components/AddButton/AddButton";
 
 function InventoryMovements() {
   useInterceptor();
@@ -195,15 +196,11 @@ function InventoryMovements() {
               />
             </div>
           ))}
-          <div style={{ display: "flex" }}>
-            <Button
-              style={{ marginLeft: "auto" }}
-              color="success"
-              variant="outlined"
-              onClick={(e) => handleAddNewInventoryItemClick(e)}
-            >
-              Add
-            </Button>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <AddButton
+              text={t("Add")}
+              handleClick={(e) => handleAddNewInventoryItemClick(e)}
+            />
           </div>
         </div>
       )}

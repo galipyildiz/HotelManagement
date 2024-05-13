@@ -21,6 +21,7 @@ import AddBuildingModal from "./AddBuildingModal";
 import EditBuildingModal from "./EditBuildingModal";
 import DetailBuildingModal from "./DetailBuildingModal";
 import { useTranslation } from "react-i18next";
+import AddButton from "../../components/AddButton/AddButton";
 
 function Buildings() {
   useInterceptor();
@@ -100,14 +101,10 @@ function Buildings() {
           marginBottom: "5px",
         }}
       >
-        <Button
-          onClick={(e) => handleAddBuildingClick(e)}
-          variant="outlined"
-          color="success"
-        >
-          <Add />
-          <span>{t("AddBuilding")}</span>
-        </Button>
+        <AddButton
+          text={t("AddBuilding")}
+          handleClick={(e) => handleAddBuildingClick(e)}
+        />
       </div>
       {/* TODO Convert to component table */}
       <TableContainer component={Paper}>
