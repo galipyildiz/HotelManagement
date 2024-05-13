@@ -76,10 +76,11 @@ namespace HotelManagement.WebAPI
             #endregion
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+
             builder.Services.AddScoped<IBuildingService, BuildingService>();
             builder.Services.AddScoped<IStorageService, StorageService>();
             builder.Services.AddScoped<IRoomService, RoomService>();
-
+            builder.Services.AddScoped<IInventoryItemService, InventoryItemService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
