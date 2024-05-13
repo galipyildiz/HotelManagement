@@ -5,7 +5,6 @@ import {
   getAllBuildingsEndPoint,
 } from "./ApiEndPoints";
 import {
-  Button,
   IconButton,
   Paper,
   Table,
@@ -16,7 +15,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Add, Delete, Edit, Settings } from "@mui/icons-material";
+import { Delete, Edit, Settings } from "@mui/icons-material";
 import AddBuildingModal from "./AddBuildingModal";
 import EditBuildingModal from "./EditBuildingModal";
 import DetailBuildingModal from "./DetailBuildingModal";
