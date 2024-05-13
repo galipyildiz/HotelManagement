@@ -12,7 +12,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
-import { getAllStoragesEndpoint } from "./ApiEndPoints";
+import {
+  addInventoryItemEndpoint,
+  getAllStoragesEndpoint,
+} from "./ApiEndPoints";
 
 function InventoryMovements() {
   useInterceptor();
@@ -67,11 +70,24 @@ function InventoryMovements() {
     setNewInventoryItem({ ...newInventoryItem, locations: temp });
   };
 
-  const handleAddNewInventoryItemClick = (e) => {
+  const handleAddNewInventoryItemClick = async (e) => {
     e.preventDefault();
-    //TODO add req
+    await addInventoryItemReq();
     setSelectedStorages([]);
     setNewInventoryItem(defaultNewInventoryItem);
+  };
+
+  const addInventoryItemReq = async () => {
+    try {
+      console.log(newInventoryItem);
+      const response = await api.post(addInventoryItemEndpoint, {
+        name: newInventoryItem.name,
+        locations: newInventoryItem.locations,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
