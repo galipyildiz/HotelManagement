@@ -8,7 +8,6 @@ namespace HotelManagement.Services.Services.Abstract
     public class RoomService : IRoomService
     {
         private readonly IRepository<Room> _repository;
-        //TODO validate fluent validation
         public RoomService(IRepository<Room> repository)
         {
             _repository = repository;
