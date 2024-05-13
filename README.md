@@ -60,6 +60,5 @@ export default Home;
 - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0
 - https://reactrouter.com/en/main/start/tutorial
 - https://mui.com/material-ui/getting-started/templates/
-- https://github.com/devias-io/material-kit-react/tree/main
 - https://github.com/mui/material-ui/tree/v5.15.17/docs/data/material/getting-started/templates
 - https://github.com/remix-run/react-router/issues/10637
