@@ -1,4 +1,5 @@
 import {
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -11,14 +12,20 @@ import {
 import React, { useEffect, useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
 import { getAllInventoryItemsEndPoint } from "./ApiEndPoint";
+import { ImportExport } from "@mui/icons-material";
+import MoveModal from "./MoveModal";
 
 function InventoryItems() {
   useInterceptor();
   const [inventoryItems, setInventoryItems] = useState([]);
+  const [selectedInventoryItem, setSelectedInventoryItem] = useState({});
+  const [moveModalOpen, setMoveModalOpen] = useState(false);
 
   useEffect(() => {
-    getInventoryItemsReq();
-  }, []);
+    if (!moveModalOpen) {
+      getInventoryItemsReq();
+    }
+  }, [moveModalOpen]);
 
   const getInventoryItemsReq = async () => {
     try {
@@ -28,6 +35,12 @@ function InventoryItems() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleInventoryItemMoveClick = (e, selectedInventoryItem) => {
+    e.preventDefault();
+    setSelectedInventoryItem(selectedInventoryItem);
+    setMoveModalOpen(true);
   };
 
   return (
@@ -44,12 +57,13 @@ function InventoryItems() {
               <TableCell>Quantity</TableCell>
               <TableCell>Storage Id</TableCell>
               <TableCell>Storage Name</TableCell>
+              <TableCell style={{ width: "100px" }} align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {inventoryItems.map((item) => (
               <TableRow
-                key={item.id}
+                key={`${item.inventoryItemId}-${item.storageId}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell>{item.inventoryItemId}</TableCell>
@@ -57,11 +71,33 @@ function InventoryItems() {
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell>{item.storageId}</TableCell>
                 <TableCell>{item.storgaName}</TableCell>
+                <TableCell align="right">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <IconButton
+                      onClick={(e) => handleInventoryItemMoveClick(e, item)}
+                    >
+                      <ImportExport color="primary" />
+                    </IconButton>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {moveModalOpen && (
+        <MoveModal
+          open={moveModalOpen}
+          setOpen={setMoveModalOpen}
+          inventoryItem={selectedInventoryItem}
+        />
+      )}
     </div>
   );
 }
