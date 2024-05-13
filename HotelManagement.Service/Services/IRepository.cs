@@ -1,6 +1,6 @@
 ﻿using HotelManagement.Data.Models;
 
-namespace HotelManagement.Service.Services.Interfaces
+namespace HotelManagement.Service.Services
 {
     public interface IRepository<T> where T : Base
     {

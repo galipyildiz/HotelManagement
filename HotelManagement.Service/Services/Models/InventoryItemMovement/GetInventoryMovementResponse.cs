@@ -1,6 +1,6 @@
 ﻿using HotelManagement.Data.Enums;
 
-namespace HotelManagement.WebAPI.Models.InventoryItemMovement
+namespace HotelManagement.Services.Models.InventoryItemMovement
 {
     public class GetInventoryMovementResponse
     {

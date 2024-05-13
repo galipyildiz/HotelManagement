@@ -1,9 +1,9 @@
 ﻿using HotelManagement.Data.Models;
-using HotelManagement.Service.Services.Interfaces;
-using HotelManagement.WebAPI.Models.Room;
-using HotelManagement.WebAPI.Services.Concrete;
+using HotelManagement.Service.Services;
+using HotelManagement.Services.Models.Room;
+using HotelManagement.Services.Services.Concrete;
 
-namespace HotelManagement.WebAPI.Services.Abstract
+namespace HotelManagement.Services.Services.Abstract
 {
     public class RoomService : IRoomService
     {

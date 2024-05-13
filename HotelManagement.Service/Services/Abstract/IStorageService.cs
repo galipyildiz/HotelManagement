@@ -1,6 +1,6 @@
-﻿using HotelManagement.WebAPI.Models.Storage;
+﻿using HotelManagement.Services.Models.Storage;
 
-namespace HotelManagement.WebAPI.Services.Concrete
+namespace HotelManagement.Services.Services.Concrete
 {
     public interface IStorageService
     {

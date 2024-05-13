@@ -1,6 +1,6 @@
-﻿namespace HotelManagement.WebAPI.Models.Room
+﻿namespace HotelManagement.Services.Models.Storage
 {
-    public class AddRoomRequest
+    public class AddStorageRequest
     {
         public int BuildingId { get; set; }
         public string Name { get; set; } = "";

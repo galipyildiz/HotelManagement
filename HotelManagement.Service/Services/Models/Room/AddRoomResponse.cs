@@ -1,4 +1,4 @@
-﻿namespace HotelManagement.WebAPI.Models.Room
+﻿namespace HotelManagement.Services.Models.Room
 {
     public class AddRoomResponse
     {

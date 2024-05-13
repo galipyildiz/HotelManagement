@@ -1,4 +1,4 @@
-﻿namespace HotelManagement.WebAPI.Models.Building
+﻿namespace HotelManagement.Services.Models.Building
 {
     public class AddBuildingRequest
     {

@@ -4,10 +4,9 @@ using HotelManagement.Service.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
-using HotelManagement.Service.Services.Interfaces;
 using HotelManagement.Service.Services;
-using HotelManagement.WebAPI.Services.Concrete;
-using HotelManagement.WebAPI.Services.Abstract;
+using HotelManagement.Services.Services.Concrete;
+using HotelManagement.Services.Services.Abstract;
 
 namespace HotelManagement.WebAPI
 {

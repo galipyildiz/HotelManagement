@@ -1,6 +1,6 @@
-﻿using HotelManagement.WebAPI.Models.Building;
+﻿using HotelManagement.Services.Models.Building;
 
-namespace HotelManagement.WebAPI.Services.Concrete
+namespace HotelManagement.Services.Services.Concrete
 {
     public interface IBuildingService
     {

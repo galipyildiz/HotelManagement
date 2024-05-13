@@ -1,5 +1,5 @@
-﻿using HotelManagement.WebAPI.Models.Room;
-using HotelManagement.WebAPI.Services.Concrete;
+﻿using HotelManagement.Services.Models.Room;
+using HotelManagement.Services.Services.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

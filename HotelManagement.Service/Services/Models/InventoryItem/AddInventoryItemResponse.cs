@@ -1,4 +1,4 @@
-﻿namespace HotelManagement.WebAPI.Models.InventoryItem
+﻿namespace HotelManagement.Services.Models.InventoryItem
 {
     public class AddInventoryItemResponse
     {

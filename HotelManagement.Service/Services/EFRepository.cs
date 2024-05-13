@@ -1,6 +1,5 @@
 ﻿using HotelManagement.Data.Models;
 using HotelManagement.Service.Data;
-using HotelManagement.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.Service.Services

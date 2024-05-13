@@ -1,5 +1,5 @@
-﻿using HotelManagement.WebAPI.Models.Storage;
-using HotelManagement.WebAPI.Services.Concrete;
+﻿using HotelManagement.Services.Models.Storage;
+using HotelManagement.Services.Services.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

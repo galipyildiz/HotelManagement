@@ -1,7 +1,7 @@
-﻿using HotelManagement.WebAPI.Models.InventoryItem;
-using HotelManagement.WebAPI.Models.InventoryItemMovement;
+﻿using HotelManagement.Services.Models.InventoryItem;
+using HotelManagement.Services.Models.InventoryItemMovement;
 
-namespace HotelManagement.WebAPI.Services.Abstract
+namespace HotelManagement.Services.Services.Abstract
 {
     public interface IInventoryItemService
     {

@@ -1,6 +1,6 @@
-﻿using HotelManagement.WebAPI.Models.Room;
+﻿using HotelManagement.Services.Models.Room;
 
-namespace HotelManagement.WebAPI.Services.Concrete
+namespace HotelManagement.Services.Services.Concrete
 {
     public interface IRoomService
     {

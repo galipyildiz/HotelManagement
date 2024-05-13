@@ -1,6 +1,6 @@
-﻿namespace HotelManagement.WebAPI.Models.Storage
+﻿namespace HotelManagement.Services.Models.Building
 {
-    public class AddStorageResponse
+    public class GetBuildingResponse
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -1,12 +1,12 @@
 ﻿using HotelManagement.Data.Models;
 using HotelManagement.Service.Data;
-using HotelManagement.Service.Services.Interfaces;
-using HotelManagement.WebAPI.Models.InventoryItem;
-using HotelManagement.WebAPI.Models.InventoryItemMovement;
-using HotelManagement.WebAPI.Services.Abstract;
+using HotelManagement.Service.Services;
+using HotelManagement.Services.Models.InventoryItem;
+using HotelManagement.Services.Models.InventoryItemMovement;
+using HotelManagement.Services.Services.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelManagement.WebAPI.Services.Concrete
+namespace HotelManagement.Services.Services.Concrete
 {
     public class InventoryItemService : IInventoryItemService
     {

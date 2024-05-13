@@ -1,5 +1,5 @@
-﻿using HotelManagement.WebAPI.Models.InventoryItem;
-using HotelManagement.WebAPI.Services.Abstract;
+﻿using HotelManagement.Services.Models.InventoryItem;
+using HotelManagement.Services.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
