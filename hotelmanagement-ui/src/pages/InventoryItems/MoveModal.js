@@ -21,7 +21,6 @@ function MoveModal({ open, setOpen, inventoryItem }) {
 
   useEffect(() => {
     getRoomsRequest();
-    console.log(inventoryItem);
   }, []);
 
   const getRoomsRequest = async () => {
