@@ -8,7 +8,7 @@ namespace HotelManagement.Services.Services.Abstract
     public class BuildingService : IBuildingService
     {
         private readonly IRepository<Building> _repository;
-        //TODO loglamayı da bu servislerde yap!
+
         public BuildingService(IRepository<Building> repository)
         {
             _repository = repository;
@@ -16,7 +16,6 @@ namespace HotelManagement.Services.Services.Abstract
 
         public async Task<AddBuildingResponse> AddBuildingAsync(AddBuildingRequest request)
         {
-            //TODO add fluent validation
             var building = await _repository.AddAsync(new Building() { Name = request.Name });
 
             return new AddBuildingResponse()
@@ -56,7 +55,6 @@ namespace HotelManagement.Services.Services.Abstract
 
         public async Task<GetBuildingResponse> GetBuildingByIdAsync(int id)
         {
-            //TODO id yoksa patlıyor
             var building = await _repository.GetByIdAsync(id);
 
             return new GetBuildingResponse()
