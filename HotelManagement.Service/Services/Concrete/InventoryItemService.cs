@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Data.Models;
 using HotelManagement.Service.Data;
 using HotelManagement.Service.Services;
+using HotelManagement.Service.Services.Models.InventoryItem;
 using HotelManagement.Services.Models.InventoryItem;
 using HotelManagement.Services.Models.InventoryItemMovement;
 using HotelManagement.Services.Services.Abstract;
@@ -85,6 +86,30 @@ namespace HotelManagement.Services.Services.Concrete
                 Name = inventoryItem.Name,
                 Locations = locations
             };
+        }
+
+        public async Task<List<GetInventoryItemResponse>> GetAllInventoryItemsAsync()
+        {
+            var inventoryItemLocations = await _hotelManagementDbContext.InventoryItemLocations
+                .Include(x => x.InventoryItem)
+                .Include(x => x.Storage)
+                .ToListAsync();
+
+            var result = new List<GetInventoryItemResponse>();
+
+            foreach (var location in inventoryItemLocations)
+            {
+                result.Add(new GetInventoryItemResponse()
+                {
+                    InventoryItemId = location.InventoryItem.Id,
+                    InventoryItemName = location.InventoryItem.Name,
+                    Quantity = location.Quantity,
+                    StorageId = location.Storage.Id,
+                    StorgaName = location.Storage.Name
+                });
+            }
+
+            return result;
         }
 
         public async Task<List<GetInventoryMovementResponse>> GetAllInventoryMovementsAsync()

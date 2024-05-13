@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Services.Models.InventoryItem;
+using HotelManagement.Services.Models.InventoryItem;
 using HotelManagement.Services.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,12 @@ namespace HotelManagement.WebAPI.Controllers
         public async Task<IActionResult> AddInventoryItem(AddInventoryItemRequest request)
         {
             var response = await _inventoryItemService.AddInventoryItemAsync(request);
+            return Ok(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllInventoryItems()
+        {
+            var response = await _inventoryItemService.GetAllInventoryItemsAsync();
             return Ok(response);
         }
     }
