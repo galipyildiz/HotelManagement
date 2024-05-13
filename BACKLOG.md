@@ -22,7 +22,7 @@
 - [x] Web API nizin güvenliği için Authorization ve Authentication eklenecek. Kullanıcı login olacak ve bir token alacak. Diğer metotlar bu token olmadan çalışmayacak. Kullanıcı 401 hatası alacak.
 - [ ] (Opsiyonel +) Loglama
 - [ ] (Opsiyonel +) Exception Handling
-- [ ] (Opsiyonel +) Localization
+- [x] (Opsiyonel +) Localization
 
 ---
 
