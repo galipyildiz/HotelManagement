@@ -4,6 +4,7 @@ namespace HotelManagement.Data.Models
 {
     public class InventoryMovement : Base
     {
+        public int InventoryItemId { get; set; }
         public required InventoryItem InventoryItem { get; set; }
         public Storage? FromStorage { get; set; }
         public Storage? ToStorage { get; set; }

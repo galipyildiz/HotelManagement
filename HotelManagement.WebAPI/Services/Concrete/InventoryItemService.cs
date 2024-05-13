@@ -1,7 +1,10 @@
 ﻿using HotelManagement.Data.Models;
+using HotelManagement.Service.Data;
 using HotelManagement.Service.Services.Interfaces;
 using HotelManagement.WebAPI.Models.InventoryItem;
+using HotelManagement.WebAPI.Models.InventoryItemMovement;
 using HotelManagement.WebAPI.Services.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.WebAPI.Services.Concrete
 {
@@ -10,15 +13,18 @@ namespace HotelManagement.WebAPI.Services.Concrete
         private readonly IRepository<InventoryItem> _inventoryItemRepository;
         private readonly IRepository<Storage> _storageRepository;
         private readonly IRepository<InventoryMovement> _inventoryMovementRepository;
+        private readonly HotelManagementDbContext _hotelManagementDbContext;
 
         public InventoryItemService(
             IRepository<InventoryItem> inventoryItemRepository,
             IRepository<Storage> storageRepository,
-            IRepository<InventoryMovement> inventoryMovementRepository)
+            IRepository<InventoryMovement> inventoryMovementRepository,
+            HotelManagementDbContext hotelManagementDbContext)
         {
             _inventoryItemRepository = inventoryItemRepository;
             _storageRepository = storageRepository;
             _inventoryMovementRepository = inventoryMovementRepository;
+            _hotelManagementDbContext = hotelManagementDbContext;
         }
         public async Task<AddInventoryItemResponse> AddInventoryItemAsync(AddInventoryItemRequest request)
         {
@@ -79,6 +85,38 @@ namespace HotelManagement.WebAPI.Services.Concrete
                 Name = inventoryItem.Name,
                 Locations = locations
             };
+        }
+
+        public async Task<List<GetInventoryMovementResponse>> GetAllInventoryMovementsAsync()
+        {
+            var result = new List<GetInventoryMovementResponse>();
+
+            var inventoryMovements = await _hotelManagementDbContext.InventoryMovements
+                .Include(im => im.InventoryItem)
+                .Include(im => im.ToStorage)
+                .Include(im => im.ToRoom)
+                .Include(im => im.FromStorage)
+                .ToListAsync();
+
+            foreach (var inventoryMovement in inventoryMovements)
+            {
+                result.Add(new GetInventoryMovementResponse
+                {
+                    InventoryMovementId = inventoryMovement.Id,
+                    FromStorageId = inventoryMovement.FromStorage?.Id ?? 0,
+                    FromStorageName = inventoryMovement.FromStorage?.Name ?? "",
+                    ToRoomId = inventoryMovement.ToRoom?.Id ?? 0,
+                    ToStorageId = inventoryMovement.ToStorage?.Id ?? 0,
+                    ToStorageName = inventoryMovement.ToStorage?.Name ?? "",
+                    MovementType = inventoryMovement.MovementType,
+                    MovementDate = inventoryMovement.MovementDate,
+                    Quantity = inventoryMovement.Quantity,
+                    InventoryItemId = inventoryMovement.InventoryItem.Id,
+                    InventoryItemName = inventoryMovement.InventoryItem.Name
+                });
+            }
+
+            return result;
         }
     }
 }

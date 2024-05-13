@@ -17,6 +17,13 @@ namespace HotelManagement.WebAPI.Controllers
             _inventoryItemService = inventoryItemService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllInventoryMovements()
+        {
+            var response = await _inventoryItemService.GetAllInventoryMovementsAsync();
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddInventoryItem(AddInventoryItemRequest request)
         {
