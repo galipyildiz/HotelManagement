@@ -3,7 +3,8 @@
 - [x] Bina, Oda, Depo olacak. Binaya bağlı birden fazla oda ve depo olabilir. Bir odanın birden fazla bina ile bağlantısı olamaz.
 - [x] Envanter/Ürün olacak. Envanter/Ürün depoda saklanacak. Bir envanter/ürün birden fazla depoda olabilir.
 - [x] (Opsiyonel +) Depo Giriş ve Depo Çıkış olacak. Kullanıcı bir ürün eklediğinde o hangi depoya eklediyse orada görünecek. Çıkış yaptığında hangi binaya ve odaya ürünün gittiğini görebilecek.
-- [ ] (Opsiyonel +) İş Emri tanımı olacak. Bu tanımı bina/oda/depo için veya envanter/ürün için bakım talepleri gibi düşünebilirsiniz. İş Emri tanımları xxx binadaki xxx odada bulunan xxx kodlu ürünün bakımı/temizliği/kontrolü şeklinde bir yapıda olacak.
+- [X] (Opsiyonel +) İş Emri tanımı olacak. Bu tanımı bina/oda/depo için veya envanter/ürün için bakım talepleri gibi düşünebilirsiniz. İş Emri tanımları xxx binadaki xxx odada bulunan xxx kodlu ürünün bakımı/temizliği/kontrolü şeklinde bir yapıda olacak.
+    - yarım tamam model hazır logic ve ui op yok. yapılabilir.
 
 ### Veritabanı
 
@@ -20,9 +21,11 @@
 - [x] Arayüzde bulunan haberleşme için ASP.NET WebAPI kullanılacak. Tüm işlemler(CRUD) için arayüzden Web API niz çağırılacak ve işlemler Web API üzerinden gerçekleştirilecektir. Örn. Bina ekleme yapmak istendiğinde formdan aldığınız bina bilgileri api/buildings/addbuilding şeklinde Web API nize gidecek. Bu Web API oluşturduğunuz Bina modelini alacak ve veritabanına ekleme yapacaktır.
 - [x] Web API niz için Swagger arayüzü oluşturabilirsiniz.
 - [x] Web API nizin güvenliği için Authorization ve Authentication eklenecek. Kullanıcı login olacak ve bir token alacak. Diğer metotlar bu token olmadan çalışmayacak. Kullanıcı 401 hatası alacak.
-- [ ] (Opsiyonel +) Loglama
-- [ ] (Opsiyonel +) Exception Handling
+- [X] (Opsiyonel +) Loglama
+- [X] (Opsiyonel +) Exception Handling
 - [x] (Opsiyonel +) Localization
+- [ ] (Kişisel Opsiyonel +) tekrar tekrar kullanılan buttons,table,inputs component çevir.
+- [ ] (Kişisel Opsiyonel +) model validation yapılabilir.
 
 ---
 
