@@ -13,8 +13,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { api } from "../../utils/api";
 import { getAllRoomsEndPoint, moveInventoryItemEndPoint } from "./ApiEndPoint";
+import { useTranslation } from "react-i18next";
 
 function MoveModal({ open, setOpen, inventoryItem }) {
+  const { t } = useTranslation();
   const [rooms, setRooms] = useState([]);
   const [targetRoomId, setTargetRoomId] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -71,15 +73,15 @@ function MoveModal({ open, setOpen, inventoryItem }) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          Move - {inventoryItem.inventoryItemName} - Inventory Item
+          {t("Move")} - {inventoryItem.inventoryItemName} - {t("InventoryItem")}
         </Typography>
         <FormControl fullWidth style={{ marginTop: "10px" }}>
-          <InputLabel id="simple-select-label">Target Room</InputLabel>
+          <InputLabel id="simple-select-label">{t("TargetRoom")}</InputLabel>
           <Select
             labelId="simple-select-label"
             id="simple-select"
             value={targetRoomId}
-            label="Target Room"
+            label={t("TargetRoom")}
             onChange={(e) => setTargetRoomId(e.target.value)}
           >
             {rooms.map((room) => (
@@ -92,7 +94,7 @@ function MoveModal({ open, setOpen, inventoryItem }) {
         <FormControl fullWidth style={{ marginTop: "10px" }}>
           <TextField
             id="outlined-number"
-            label="Quantity"
+            label={t("Quantity")}
             type="number"
             onChange={(e) => setQuantity(e.target.value)}
             defaultValue={quantity}
@@ -113,7 +115,7 @@ function MoveModal({ open, setOpen, inventoryItem }) {
             variant="contained"
             color="secondary"
           >
-            Move
+            {t("Move")}
           </Button>
         </DialogActions>
       </Box>

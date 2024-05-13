@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { api } from "../../utils/api";
+import { api, useInterceptor } from "../../utils/api";
 import {
   addRoomEndPoint,
   addStorageEndPoint,
@@ -26,8 +26,11 @@ import {
   getStoragesByBuildingIdEndPoint,
 } from "./ApiEndPoints";
 import { Delete, Edit } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 function DetailBuildingModal({ open, setOpen, buildingId }) {
+  useInterceptor();
+  const { t } = useTranslation();
   const [building, setBuilding] = useState({});
   const [rooms, setRooms] = useState([]);
   const [storages, setStorages] = useState([]);
@@ -159,7 +162,7 @@ function DetailBuildingModal({ open, setOpen, buildingId }) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          {building.name}'s Detail
+          {building.name} - {t("Detail")}
         </Typography>
         <Divider />
         <Typography
@@ -169,14 +172,14 @@ function DetailBuildingModal({ open, setOpen, buildingId }) {
           marginTop={5}
           style={{ display: "flex" }}
         >
-          Rooms
+          {t("Rooms")}
           <Button
             style={{ marginLeft: "auto" }}
             variant="outlined"
             color="success"
             onClick={(e) => handleAddRoomClick(e)}
           >
-            Add Room
+            {t("AddRoom")}
           </Button>
         </Typography>
         <TableContainer style={{ marginTop: "10px" }} component={Paper}>
@@ -231,14 +234,14 @@ function DetailBuildingModal({ open, setOpen, buildingId }) {
           marginTop={5}
           style={{ display: "flex" }}
         >
-          Storages
+          {t("Storages")}
           <Button
             style={{ marginLeft: "auto" }}
             variant="outlined"
             color="success"
             onClick={(e) => handleAddStorageClick(e)}
           >
-            Add Storage
+            {t("AddStorage")}
           </Button>
         </Typography>
         <TableContainer style={{ marginTop: "10px" }} component={Paper}>

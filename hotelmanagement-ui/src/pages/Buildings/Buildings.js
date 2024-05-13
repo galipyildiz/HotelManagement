@@ -20,9 +20,11 @@ import { Add, Delete, Edit, Settings } from "@mui/icons-material";
 import AddBuildingModal from "./AddBuildingModal";
 import EditBuildingModal from "./EditBuildingModal";
 import DetailBuildingModal from "./DetailBuildingModal";
+import { useTranslation } from "react-i18next";
 
 function Buildings() {
   useInterceptor();
+  const { t } = useTranslation();
   const [buildings, setBuildings] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -87,9 +89,8 @@ function Buildings() {
 
   return (
     <div>
-      {/* TODO convert to component page header */}
       <Typography variant="h5" marginBottom={5}>
-        Buildings
+        {t("Buildings")}
       </Typography>
       <div
         style={{
@@ -105,7 +106,7 @@ function Buildings() {
           color="success"
         >
           <Add />
-          <span>Add Building</span>
+          <span>{t("AddBuilding")}</span>
         </Button>
       </div>
       {/* TODO Convert to component table */}

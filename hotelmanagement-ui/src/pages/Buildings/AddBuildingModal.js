@@ -9,9 +9,11 @@ import {
 import React, { useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
 import { addBuildingEndPoint } from "./ApiEndPoints";
+import { useTranslation } from "react-i18next";
 
 function AddBuildingModal({ open, setOpen }) {
   useInterceptor();
+  const { t } = useTranslation();
   const [buildingName, setBuildingName] = useState("");
 
   const handleAddClick = async (e) => {
@@ -50,11 +52,11 @@ function AddBuildingModal({ open, setOpen }) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          Add Building
+          {t("AddBuilding")}
         </Typography>
         <TextField
           id="input"
-          label="New Building Name"
+          label={t("NewBuildingName")}
           value={buildingName}
           onChange={(e) => setBuildingName(e.target.value)}
           fullWidth
@@ -66,7 +68,7 @@ function AddBuildingModal({ open, setOpen }) {
             variant="contained"
             color="success"
           >
-            Add
+            {t("Add")}
           </Button>
         </DialogActions>
       </Box>

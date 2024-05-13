@@ -1,0 +1,25 @@
+{
+    "Home": "Home",
+    "LayoutHeader": "Hotel Management",
+    "Buildings": "Buildings",
+    "InventoryMovements": "Inventory Movements",
+    "InventoryItems": "Inventory Items",
+    "WorkOrders": "Work Orders",
+    "AddBuilding": "Add Building",
+    "Add": "Add",
+    "NewBuildingName": "New Building Name",
+    "Edit": "Edit",
+    "EditBuilding": "Edit Building",
+    "Detail": "Detail",
+    "Rooms": "Rooms",
+    "AddRoom": "Add Room",
+    "Storages": "Storages",
+    "AddStorage": "Add Storage",
+    "Move": "Move",
+    "InventoryItem": "Inventory Item",
+    "TargetRoom": "Target Room",
+    "Quantity": "Quantity",
+    "InventoryMovementsText": "Add Inventory Item. Select Target Storages",
+    "TargetStorages":"Target Storages"
+}
+  

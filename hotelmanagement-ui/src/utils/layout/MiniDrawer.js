@@ -24,6 +24,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import i18n from "../localization/i18n";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 
@@ -94,8 +96,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,6 +106,10 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const changeLanguage = (event) => {
+    i18n.changeLanguage(event.target.value);
   };
 
   return (
@@ -123,8 +130,14 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Hotel Management
+            {t("LayoutHeader")}
           </Typography>
+          <div style={{ position: "absolute", top: 10, right: 10 }}>
+            <select defaultValue={i18n.language} onChange={changeLanguage}>
+              <option value="en">English</option>
+              <option value="tr">Türkçe</option>
+            </select>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -139,7 +152,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem key={"Home"} disablePadding sx={{ display: "block" }}>
+          <ListItem key={t("Home")} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -157,10 +170,17 @@ export default function MiniDrawer() {
               >
                 <Home />
               </ListItemIcon>
-              <ListItemText primary={"Home"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={t("Home")}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"Buildings"} disablePadding sx={{ display: "block" }}>
+          <ListItem
+            key={t("Buildings")}
+            disablePadding
+            sx={{ display: "block" }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -179,7 +199,7 @@ export default function MiniDrawer() {
                 <Apartment />
               </ListItemIcon>
               <ListItemText
-                primary={"Buildings"}
+                primary={t("Buildings")}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
@@ -206,7 +226,7 @@ export default function MiniDrawer() {
                 <Category />
               </ListItemIcon>
               <ListItemText
-                primary={"Inventory Movements"}
+                primary={t("InventoryMovements")}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
@@ -230,7 +250,7 @@ export default function MiniDrawer() {
                 <Inventory />
               </ListItemIcon>
               <ListItemText
-                primary={"Inventory Items"}
+                primary={t("InventoryItems")}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
@@ -254,7 +274,7 @@ export default function MiniDrawer() {
                 <WorkHistory />
               </ListItemIcon>
               <ListItemText
-                primary={"Work Orders"}
+                primary={t("WorkOrders")}
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>

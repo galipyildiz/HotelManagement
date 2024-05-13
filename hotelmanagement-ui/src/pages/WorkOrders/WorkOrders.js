@@ -1,10 +1,13 @@
 import { Typography } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function WorkOrders() {
+  const { t } = useTranslation();
+
   return (
     <Typography variant="h5" marginBottom={5}>
-      Work Orders
+      {t("WorkOrders")}
     </Typography>
   );
 }

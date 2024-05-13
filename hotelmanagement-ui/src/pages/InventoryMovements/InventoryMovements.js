@@ -25,9 +25,11 @@ import {
   getAllInventoryMovementsEndpoint,
   getAllStoragesEndpoint,
 } from "./ApiEndPoints";
+import { useTranslation } from "react-i18next";
 
 function InventoryMovements() {
   useInterceptor();
+  const { t } = useTranslation();
   const defaultNewInventoryItem = {
     name: "",
     locations: [],
@@ -110,14 +112,16 @@ function InventoryMovements() {
   return (
     <div>
       <Typography variant="h5" marginBottom={5}>
-        Inventory Movements
+        {t("InventoryMovements")}
       </Typography>
       <div>
         <Typography paragraph marginBottom={5}>
-          Add Inventory Item. Select Target Storages
+          {t("InventoryMovementsText")}
         </Typography>
         <FormControl sx={{ width: 300 }}>
-          <InputLabel id="multiple-checkbox-label">Target Storages</InputLabel>
+          <InputLabel id="multiple-checkbox-label">
+            {t("TargetStorages")}
+          </InputLabel>
           <Select
             labelId="multiple-checkbox-label"
             id="multiple-checkbox"

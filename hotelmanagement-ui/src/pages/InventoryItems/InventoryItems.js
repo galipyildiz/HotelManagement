@@ -14,9 +14,11 @@ import { api, useInterceptor } from "../../utils/api";
 import { getAllInventoryItemsEndPoint } from "./ApiEndPoint";
 import { ImportExport } from "@mui/icons-material";
 import MoveModal from "./MoveModal";
+import { useTranslation } from "react-i18next";
 
 function InventoryItems() {
   useInterceptor();
+  const { t } = useTranslation();
   const [inventoryItems, setInventoryItems] = useState([]);
   const [selectedInventoryItem, setSelectedInventoryItem] = useState({});
   const [moveModalOpen, setMoveModalOpen] = useState(false);
@@ -46,7 +48,7 @@ function InventoryItems() {
   return (
     <div>
       <Typography variant="h5" marginBottom={5}>
-        Inventory Items
+        {t("InventoryItems")}
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }}>

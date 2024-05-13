@@ -13,9 +13,11 @@ import {
   getGetBuildingByIdEndPoint,
   updateBuildingEndPoint,
 } from "./ApiEndPoints";
+import { useTranslation } from "react-i18next";
 
 function EditBuildingModal({ open, setOpen, buildingId }) {
   useInterceptor();
+  const { t } = useTranslation();
   const [buildingName, setBuildingName] = useState("");
 
   useEffect(() => {
@@ -70,11 +72,11 @@ function EditBuildingModal({ open, setOpen, buildingId }) {
         }}
       >
         <Typography id="modal-title" variant="h6" component="h2">
-          Edit Building
+          {t("EditBuilding")}
         </Typography>
         <TextField
           id="input"
-          label="New Building Name"
+          label={t("NewBuildingName")}
           value={buildingName}
           onChange={(e) => setBuildingName(e.target.value)}
           fullWidth
@@ -86,7 +88,7 @@ function EditBuildingModal({ open, setOpen, buildingId }) {
             variant="contained"
             color="secondary"
           >
-            Edit
+            {t("Edit")}
           </Button>
         </DialogActions>
       </Box>
