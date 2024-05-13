@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useAppContext } from "./AppContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const api = axios.create({
@@ -14,15 +15,17 @@ const useInterceptor = () => {
   const { token, removeToken } = useAppContext();
   const navigate = useNavigate();
 
-  api.interceptors.request.use(
-    (config) => {
-      config.headers.Authorization = `Bearer ${token}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  useEffect(() => {
+    api.interceptors.request.use(
+      (config) => {
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+  }, [token]);
 
   api.interceptors.response.use(
     (response) => {
