@@ -51,5 +51,12 @@ namespace HotelManagement.WebAPI.Controllers
             var response = await _roomService.UpdateRoomAsync(id, request);
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllRooms()
+        {
+            var response = await _roomService.GetAllRoomsAsync();
+            return Ok(response);
+        }
     }
 }

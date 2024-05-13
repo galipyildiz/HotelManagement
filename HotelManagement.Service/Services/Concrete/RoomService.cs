@@ -38,6 +38,23 @@ namespace HotelManagement.Services.Services.Abstract
             await _repository.DeleteAsync(room);
         }
 
+        public async Task<List<GetRoomResponse>> GetAllRoomsAsync()
+        {
+            var rooms = await _repository.GetAllAsync();
+            var result = new List<GetRoomResponse>();
+
+            foreach (var room in rooms)
+            {
+                result.Add(new GetRoomResponse
+                {
+                    Id = room.Id,
+                    Name = room.Name
+                });
+            }
+
+            return result;
+        }
+
         public async Task<GetRoomResponse> GetRoomByIdAsync(int id)
         {
             var room = await _repository.GetByIdAsync(id);

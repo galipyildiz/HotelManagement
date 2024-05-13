@@ -9,5 +9,6 @@ namespace HotelManagement.Services.Services.Concrete
         Task<AddRoomResponse> AddRoomAsync(AddRoomRequest request);
         Task DeleteRoomAsync(int id);
         Task<GetRoomResponse> UpdateRoomAsync(int id, AddRoomRequest request);
+        Task<List<GetRoomResponse>> GetAllRoomsAsync();
     }
 }
