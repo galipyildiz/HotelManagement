@@ -81,6 +81,9 @@ namespace HotelManagement.WebAPI
             builder.Services.AddScoped<IRoomService, RoomService>();
             builder.Services.AddScoped<IInventoryItemService, InventoryItemService>();
 
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.AddProblemDetails();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -94,6 +97,8 @@ namespace HotelManagement.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseExceptionHandler();
 
             app.UseHttpsRedirection();
 
