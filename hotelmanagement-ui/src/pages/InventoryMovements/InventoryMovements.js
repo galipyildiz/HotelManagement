@@ -1,12 +1,21 @@
 import {
   Button,
   Checkbox,
+  Divider,
   FormControl,
+  IconButton,
   InputLabel,
   ListItemText,
   MenuItem,
   OutlinedInput,
+  Paper,
   Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,8 +23,10 @@ import React, { useEffect, useState } from "react";
 import { api, useInterceptor } from "../../utils/api";
 import {
   addInventoryItemEndpoint,
+  getAllInventoryMovementsEndpoint,
   getAllStoragesEndpoint,
 } from "./ApiEndPoints";
+import { Delete, ImportExport } from "@mui/icons-material";
 
 function InventoryMovements() {
   useInterceptor();
@@ -25,18 +36,25 @@ function InventoryMovements() {
   };
   const [storages, setStorages] = useState([]);
   const [selectedStorages, setSelectedStorages] = useState([]);
-  const [inventoryItems, setInventoryItems] = useState([]);
+  const [inventoryItemMovements, setInventoryItemMovements] = useState([]);
   const [newInventoryItem, setNewInventoryItem] = useState(
     defaultNewInventoryItem
   );
 
   useEffect(() => {
     getStoragesRequest();
+    getInventoryMovementsReq();
   }, []);
 
-  useEffect(() => {
-    console.log(newInventoryItem);
-  }, [newInventoryItem]);
+  const getInventoryMovementsReq = async () => {
+    try {
+      const response = await api.get(getAllInventoryMovementsEndpoint);
+      console.log(response.data);
+      setInventoryItemMovements(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getStoragesRequest = async () => {
     try {
@@ -79,12 +97,13 @@ function InventoryMovements() {
 
   const addInventoryItemReq = async () => {
     try {
-      console.log(newInventoryItem);
       const response = await api.post(addInventoryItemEndpoint, {
         name: newInventoryItem.name,
         locations: newInventoryItem.locations,
       });
-      console.log(response.data);
+      if (response.status === 200) {
+        getInventoryMovementsReq();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -186,6 +205,69 @@ function InventoryMovements() {
           </div>
         </div>
       )}
+      <Divider style={{ marginTop: "10px", marginBottom: "10px" }} />
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }}>
+          <TableHead>
+            <TableRow>
+              {/* <TableCell>Movement Id</TableCell> */}
+              {/* <TableCell>Inventory Item Id</TableCell> */}
+              <TableCell>Inventory Item Name</TableCell>
+              {/* <TableCell>From Storage Id</TableCell> */}
+              <TableCell>From Storage Name</TableCell>
+              {/* <TableCell>To Storage Id</TableCell> */}
+              <TableCell>To Storage Name</TableCell>
+              {/* <TableCell>To Room Id</TableCell> */}
+              <TableCell>To Room Name</TableCell>
+              <TableCell>Movement Type</TableCell>
+              <TableCell>Movement Date</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell style={{ width: "100px" }} align="right"></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {inventoryItemMovements.map((inventoryMovement) => (
+              <TableRow
+                key={inventoryMovement.inventoryMovementId}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                {/* <TableCell>{inventoryMovement.inventoryMovementId}</TableCell> */}
+                {/* <TableCell>{inventoryMovement.inventoryItemId}</TableCell> */}
+                <TableCell>{inventoryMovement.inventoryItemName}</TableCell>
+                {/* <TableCell>{inventoryMovement.fromStorageId}</TableCell> */}
+                <TableCell>{inventoryMovement.fromStorageName}</TableCell>
+                {/* <TableCell>{inventoryMovement.toStorageId}</TableCell> */}
+                <TableCell>{inventoryMovement.toStorageName}</TableCell>
+                {/* <TableCell>{inventoryMovement.toRoomId}</TableCell> */}
+                <TableCell>{inventoryMovement.toRoomName}</TableCell>
+                <TableCell>{inventoryMovement.movementType}</TableCell>
+                <TableCell>{inventoryMovement.movementDate}</TableCell>
+                <TableCell>{inventoryMovement.quantity}</TableCell>
+                <TableCell align="right">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <IconButton
+                    // onClick={(e) => handleEditBuildingClick(e, building.id)}
+                    >
+                      <ImportExport color="primary" />
+                    </IconButton>
+                    <IconButton
+                    // onClick={(e) => handleDeleteBuildingClick(e, building.id)}
+                    >
+                      <Delete color="error" />
+                    </IconButton>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
